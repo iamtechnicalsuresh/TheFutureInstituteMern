@@ -1,0 +1,379 @@
+/* ############################################
+NavBar Section
+##############################################*/
+.main-nav {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 5rem;
+  font-size: 1.2rem;
+}
+
+.logo h1 {
+  font-weight: bold;
+}
+
+.nav-items {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.nav-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5rem;
+  width: 100%;
+  z-index: 10;
+  background-color: #eaebff;
+}
+
+.nav-item {
+  margin: 0 1rem;
+  font-weight: bold;
+  position: relative;
+}
+
+.nav-item::before {
+  content: "";
+  position: absolute;
+  top: 25px;
+  left: -25px;
+  right: -25px;
+  bottom: 25px;
+  background-color: blue;
+  background: linear-gradient(to top left, blue, rgb(83, 83, 168));
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  z-index: -1;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.nav-item:hover::before {
+  top: -25px;
+  bottom: -25px;
+  opacity: 1;
+}
+
+.nav-item.active::before {
+  top: -25px;
+  bottom: -25px;
+  opacity: 1;
+}
+
+.nav-item a {
+  color: black;
+}
+
+.nav-item a:hover {
+  color: white;
+}
+
+.nav-item.active a {
+  color: white;
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icons div i {
+  margin: 0 0.5rem;
+  cursor: pointer;
+  background: linear-gradient(to top left, blue, rgb(83, 83, 168));
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: white;
+  transition: transform 0.2s ease-in;
+}
+
+.nav-icons div i:hover {
+  transform: translateY(-4px);
+}
+
+.nav-items.nav-active {
+  transform: translateY(0);
+}
+
+.nav-toggler {
+  display: none;
+}
+
+.nav-toggler i {
+  font-size: 1.5rem;
+}
+
+.accounts {
+  position: relative;
+}
+
+.accounts .account {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 3.5rem;
+  left: -3rem;
+  width: 15rem;
+  z-index: 20;
+  background-color: white;
+  border-radius: 0.4rem;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.accounts .account::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 26%;
+  width: 1rem;
+  height: 1rem;
+  background: linear-gradient(to top left, blue, rgb(83, 83, 168));
+  transform: rotate(45deg);
+  z-index: -2;
+  border-top: solid 1px black;
+  border-left: solid 1px black;
+}
+
+.accounts .account a {
+  padding: 1rem;
+  border-radius: 0.4rem;
+  color: black;
+}
+
+.account-hidden {
+  opacity: 0;
+  z-index: -100;
+  transform: translateY(-0.6rem);
+}
+
+.accounts .account a:hover {
+  background-color: rgb(155, 153, 153);
+}
+
+.search {
+  position: relative;
+}
+
+.search-bar {
+  position: absolute;
+  top: 3rem;
+  left: -7rem;
+  z-index: 21;
+  border: blue solid 1px;
+  padding: 0.4rem 0.8rem;
+  background: linear-gradient(to top left, blue, rgb(83, 83, 168));
+  border-radius: 0.4rem;
+  transition: all 0.2s ease-in;
+}
+
+.search-bar-hidden {
+  opacity: 0;
+  z-index: -1;
+  transform: translateY(-0.5rem);
+}
+
+.search-bar__form {
+  display: flex;
+}
+
+.search-input {
+  width: 12rem;
+  border: none;
+  border-bottom-left-radius: 0.4rem;
+  outline: none;
+  padding: 0.2rem 0.4rem;
+}
+
+.search-button {
+  border: none;
+  background-color: white;
+  padding: 0.2rem 0.4rem;
+  border-top-right-radius: 0.4rem;
+}
+/* ############################################
+Crousel Section
+##############################################*/
+
+.crousels {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.crousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: calc(100vh - 5rem);
+  transition: all 0.5s ease-in-out;
+}
+
+.crousel--items__image {
+  width: 100%;
+  height: 100%;
+}
+
+.crousel-text {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transform: translate(-50%, -40%);
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 0.5rem;
+}
+
+.crousel-text .primary-heading {
+  color: white;
+}
+
+.crousel-dots-container {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  transform: translate(-50%, -30%);
+}
+
+.crousel--dot {
+  padding: 0.8rem;
+  background-color: rgba(247, 244, 244, 0.5);
+  border-radius: 50%;
+}
+
+.dot--active {
+  background-color: white;
+}
+
+.crousel--left--btn,
+.crousel--right--btn {
+  border-radius: 50%;
+  padding: 1rem;
+  cursor: pointer;
+  background: rgba(247, 244, 244, 0.5);
+}
+
+.crousel--left--btn:hover {
+  background-color: rgba(71, 35, 35, 0.5);
+}
+.crousel--right--btn:hover {
+  background-color: rgba(71, 35, 35, 0.5);
+}
+
+.crousel--left--btn {
+  position: absolute;
+  top: 50%;
+  left: -1.5rem;
+  transform: translate(50%, -50%);
+}
+
+.crousel--right--btn {
+  position: absolute;
+  top: 50%;
+  right: -1.5rem;
+  transform: translate(-50%, -50%);
+}
+
+.crousel--left--btn i,
+.crousel--right--btn i {
+  font-size: 2rem;
+  color: white;
+}
+
+/* ############################################
+Crousel Section
+##############################################*/
+
+.course-content {
+  list-style: none;
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  padding: 0 2rem;
+}
+
+.about-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-left h2 {
+  font-size: 4.5rem;
+}
+
+.about-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 25rem;
+}
+
+/* ############################################
+Footer Section
+##############################################*/
+.footer {
+  background-color: black;
+}
+
+.footer .footer-links {
+  padding: 1rem;
+}
+
+.footer .footer-links .footer-links__links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.footer .footer-links .footer-links__links li {
+  list-style: none;
+  padding: 1rem;
+  color: white;
+}
+
+.footer .footer-links .footer-links__links li a {
+  color: white;
+}
+
+.footer .address {
+  text-align: center;
+  padding: 1rem 4rem;
+}
+
+.footer .address .secondary-description {
+  /* padding: 2rem; */
+  color: white;
+}
+
+.footer .all-right-reservered {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  background-color: maroon;
+  color: white;
+}

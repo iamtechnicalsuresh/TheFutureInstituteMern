@@ -1,0 +1,101 @@
+.crousels {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.crousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: calc(100vh - 5rem);
+  transition: all 0.5s ease-in-out;
+}
+
+.crousel--items__image {
+  width: 100%;
+  height: 100%;
+}
+
+.crousel-text {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transform: translate(-50%, -40%);
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 0.5rem;
+}
+
+.crousel-text .primary-heading {
+  color: white;
+}
+
+.crousel-dots-container {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  transform: translate(-50%, -30%);
+}
+
+.crousel--dot {
+  padding: 0.8rem;
+  background-color: rgba(247, 244, 244, 0.5);
+  border-radius: 50%;
+}
+
+.dot--active {
+  background-color: white;
+}
+
+.crousel--left--btn,
+.crousel--right--btn {
+  border-radius: 50%;
+  padding: 1rem;
+  cursor: pointer;
+  background: rgba(247, 244, 244, 0.5);
+}
+
+.crousel--left--btn:hover {
+  background-color: rgba(71, 35, 35, 0.5);
+}
+.crousel--right--btn:hover {
+  background-color: rgba(71, 35, 35, 0.5);
+}
+
+.crousel--left--btn {
+  position: absolute;
+  top: 50%;
+  left: -1.5rem;
+  transform: translate(50%, -50%);
+}
+
+.crousel--right--btn {
+  position: absolute;
+  top: 50%;
+  right: -1.5rem;
+  transform: translate(-50%, -50%);
+}
+
+.crousel--left--btn i,
+.crousel--right--btn i {
+  font-size: 2rem;
+  color: white;
+}

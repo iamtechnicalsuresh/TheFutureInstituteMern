@@ -18,6 +18,7 @@ const coursesSchema = mongoose.Schema(
     courseTopics: [
       {
         type: String,
+        required: true,
       },
     ],
     courseDuration: {

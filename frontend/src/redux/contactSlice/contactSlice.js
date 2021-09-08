@@ -26,13 +26,18 @@ export const postContact = createAsyncThunk(
 const initialState = {
   loading: false,
   contact: {},
+  success: "",
   error: "",
 };
 
 const contactSlice = createSlice({
   name: "contact",
   initialState,
-  reducers: {},
+  reducers: {
+    clearError(state) {
+      state.error = "";
+    },
+  },
   extraReducers: {
     [postContact.pending]: (state, action) => {
       state.loading = true;
@@ -40,6 +45,7 @@ const contactSlice = createSlice({
     [postContact.fulfilled]: (state, action) => {
       state.loading = false;
       state.contact = action.payload;
+      state.success = true;
     },
     [postContact.rejected]: (state, action) => {
       state.loading = false;
@@ -48,4 +54,5 @@ const contactSlice = createSlice({
   },
 });
 
+export const { clearError } = contactSlice.actions;
 export default contactSlice.reducer;

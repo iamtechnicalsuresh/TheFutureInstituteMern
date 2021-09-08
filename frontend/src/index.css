@@ -68,6 +68,17 @@ img {
   background: rgb(83, 83, 168);
 }
 
+.btn-danger {
+  background: linear-gradient(to top left, red, rgb(202, 140, 140));
+  color: white;
+  font-weight: bold;
+  transition: all 0.4s ease-in;
+}
+
+.btn-danger:hover {
+  background: rgb(185, 126, 128);
+}
+
 .btn-white {
   font-weight: bold;
   color: black;

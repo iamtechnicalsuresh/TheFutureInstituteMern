@@ -23,7 +23,25 @@ export const getCourse = catchAsyncHandler(async (req, res, next) => {
 });
 
 export const createCourse = catchAsyncHandler(async (req, res, next) => {
-  const course = await Courses.create(req.body);
+  let topics;
+
+  const {
+    courseName,
+    courseDescription,
+    courseTopics,
+    courseDuration,
+    coursePrice,
+    courseCoverImage,
+  } = req.body;
+  topics = courseTopics.map((item) => item.newTopic);
+  const course = await Courses.create({
+    courseName,
+    courseDescription,
+    courseTopics: topics,
+    courseDuration,
+    coursePrice,
+    courseCoverImage,
+  });
   res.status(201).json({
     status: "success",
     course,
@@ -32,7 +50,7 @@ export const createCourse = catchAsyncHandler(async (req, res, next) => {
 
 export const deleteCourse = catchAsyncHandler(async (req, res, next) => {
   const slug = req.params.slug;
-  const course = await Courses.findOneAndRemove({ slug });
+  const course = await Courses.findOneAndDelete({ slug });
   if (!course) {
     return next(new appCustomError("Course not found.", 404));
   }

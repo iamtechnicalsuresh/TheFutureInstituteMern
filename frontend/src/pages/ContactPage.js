@@ -1,16 +1,27 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 
-import { postContact } from "../redux/contactSlice/contactSlice";
+import { postContact, clearError } from "../redux/contactSlice/contactSlice";
 
 const ContactPage = () => {
   const dispatch = useDispatch();
+  const contact = useSelector((state) => state.contact);
+  const { success, error, loading } = contact;
 
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [purpose, setPurpose] = useState("");
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    if (error) {
+      toast(error);
+      dispatch(clearError());
+    }
+  });
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -19,6 +30,9 @@ const ContactPage = () => {
 
   return (
     <section className="section onScrollNavFixed">
+      {loading && <Loader />}
+      {error && toast({ error })}
+      {success && toast("We will Contact you soon.")}
       <div className="container">
         <div className="grid grid-col-2">
           <form action="" className="forms" onSubmit={submitHandler}>

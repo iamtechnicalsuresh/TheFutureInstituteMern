@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
 import { fetchCourses } from "../redux/coursesSlice/coursesSlice";
 
+import Card from "../components/Card";
 import Loader from "../components/Loader";
 
 const CoursesPage = () => {
@@ -12,7 +15,6 @@ const CoursesPage = () => {
     loading,
     error,
   } = course;
-  console.log("error", error);
 
   useEffect(() => {
     dispatch(fetchCourses());
@@ -21,12 +23,23 @@ const CoursesPage = () => {
   return (
     <div>
       {loading && <Loader />}
+      {error && toast(error)}
       <section className="section onScrollNavFixed">
         <div className="container">
           <div className="section-title">
             <h1 className="primary-heading">Courses We Offer</h1>
           </div>
           <div className="grid grid-col-3">
+            {courses &&
+              courses.map((item) => (
+                <Card
+                  key={item._id}
+                  image={item.courseCoverImage}
+                  title={item.courseName}
+                  description={item.courseDescription}
+                  link={item.courseSlug}
+                />
+              ))}
             <div className="card">
               <img
                 src="/images/crousel-1.jpg"

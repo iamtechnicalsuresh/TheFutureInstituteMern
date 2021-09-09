@@ -10,4 +10,4 @@ class AppCustomError extends Error {
   }
 }
 
-export default new AppCustomError();
+export default AppCustomError;

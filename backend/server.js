@@ -7,6 +7,7 @@ import globleErrorHandler from "./middlewares/globleErrorHandler.js";
 
 import coursesRoutes from "./routes/coursesRoutes.js";
 import contactUsRoute from "./routes/contactUsRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 dotenv.config();
@@ -18,6 +19,7 @@ if (process.env.NODE_ENV === "development") {
 
 app.use("/api/v1/courses", coursesRoutes);
 app.use("/api/v1/contact", contactUsRoute);
+app.use("/api/v1/users", userRoutes);
 
 app.get("/", (req, res, next) => {
   res.json({

@@ -172,6 +172,11 @@ img {
   gap: 2rem;
 }
 
+.grid-col-sidebar {
+  grid-template-columns: 15rem 1fr;
+  gap: 2rem;
+}
+
 .card {
   display: flex;
   flex-direction: column;

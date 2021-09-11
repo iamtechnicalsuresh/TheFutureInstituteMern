@@ -52,7 +52,40 @@ export const loginUser = catchAsyncHandler(async (req, res, next) => {
     token,
     fullname: user.fullname,
     email: user.email,
+    role: user.role,
     profileImage: user.profileImage,
     message: "User Login Successfully.",
+  });
+});
+
+export const getUsers = catchAsyncHandler(async (req, res, next) => {
+  const users = await User.find();
+  res.status(200).json({
+    status: "success",
+    users,
+  });
+});
+
+export const getUser = catchAsyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  const user = await User.findById(id);
+  if (!user) {
+    return next(new AppCustomError("User not found", 400));
+  }
+  res.status(200).json({
+    status: "success",
+    user,
+  });
+});
+
+export const deleteUser = catchAsyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  const user = await User.findByIdAndDelete(id);
+  if (!user) {
+    return next(new AppCustomError("User not found", 400));
+  }
+  res.status(200).json({
+    status: "success",
+    message: "User removed Successfully.",
   });
 });

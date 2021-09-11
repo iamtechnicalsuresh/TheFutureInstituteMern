@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = {
   loading: false,
-  user: localStorage.getItem("userInfo")
+  user: localStorage.getItem("theFutureInsituteUserInfo")
     ? JSON.parse(localStorage.getItem("theFutureInsituteUserInfo"))
     : null,
   error: "",

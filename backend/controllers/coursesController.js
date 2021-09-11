@@ -11,8 +11,8 @@ export const getCourses = catchAsyncHandler(async (req, res, next) => {
 });
 
 export const getCourse = catchAsyncHandler(async (req, res, next) => {
-  const slug = req.params.slug;
-  const course = await Courses.findOne({ slug });
+  const courseSlug = req.params.slug;
+  const course = await Courses.findOne({ courseSlug });
   if (!course) {
     next(new appCustomError("Invalid Resource. Resource not Found.", 404));
   }
@@ -49,8 +49,8 @@ export const createCourse = catchAsyncHandler(async (req, res, next) => {
 });
 
 export const deleteCourse = catchAsyncHandler(async (req, res, next) => {
-  const slug = req.params.slug;
-  const course = await Courses.findOneAndDelete({ slug });
+  const courseSlug = req.params.slug;
+  const course = await Courses.findOneAndDelete({ courseSlug });
   if (!course) {
     return next(new appCustomError("Course not found.", 404));
   }

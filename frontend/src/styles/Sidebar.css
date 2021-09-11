@@ -1,0 +1,25 @@
+.side-nav-main {
+  min-height: 100vh;
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.side-nav-item {
+  padding: 1rem 0rem;
+  width: 100%;
+  padding: 1rem 2rem;
+  color: white;
+  font-size: 1.1rem;
+  border-bottom: 1px solid white;
+}
+
+.side-nav-item:hover {
+  background: rgba(0, 0, 0, 0.5);
+}

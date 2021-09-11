@@ -1,12 +1,11 @@
-const data = [
+const courses = [
   {
-    id: 1,
     courseName: "Python Programming",
-    slug: "python-programming",
     courseDescription: `Python is an interpreted, interactive, object-oriented programming language. It incorporates modules, exceptions, dynamic typing, very high level dynamic data types, and classes. Python is a popular general-purpose programming language that can be used for a wide variety of applications. It includes high-level data structures, dynamic typing, dynamic binding, and many more features that make it as useful for complex application development as it is for scripting or "glue code" that connects components together. It can also be extended to make system calls to almost all operating systems and to run code written in C or C++. Due to its ubiquity and ability to run on nearly every system architecture, Python is a universal language found in a variety of different applications.`,
     courseDuration: "3 Months",
+    courseCoverImage: "crousel-1.jpg",
     coursePrice: 5000,
-    topics: [
+    courseTopics: [
       "First Programe - Hello World",
       "Variable Types",
       "Basic Operators",
@@ -34,15 +33,14 @@ const data = [
     ],
   },
   {
-    id: 2,
     courseName: "C++ Programming Language",
-    slug: "c-plus-plus-programming",
     courseDescription: `C++ is a powerful general-purpose programming language. It can be used to develop operating systems, browsers, games, and so on. C++ supports different ways of programming like procedural, object-oriented, functional, and so on. This makes C++ powerful as well as flexible.
 
     Our C++ programming tutorial will guide you to learn C++ programming one step at a time.`,
     courseDuration: "4 Months",
+    courseCoverImage: "crousel-2.jpg",
     coursePrice: 6000,
-    topics: [
+    courseTopics: [
       "Environment Setup",
       "Basic Syntax",
       "Comments",
@@ -75,15 +73,14 @@ const data = [
     ],
   },
   {
-    id: 3,
     courseName: "HTML and CSS Website Designing",
-    slug: "html-and-css-website-designing",
     courseDescription: `Let’s start by breaking down exactly what the acronym ‘HTML’ stands for. HTML stands for HyperText Markup Language. HyperText is effectively a text within a text, and a markup language is a language understood by computers, designed to essentially describe webpages and make the text you use more interactive.
 
     CSS is the acronym for Cascade Styling Sheets. In short, it is a sheet style language, which is a type of language you can use to describe the presentation of a markup language – in this case, to describe the movements of HTML. It effectively determines how the building blocks, as laid by HTML, are decorated and presented to the user.`,
     courseDuration: "5 Months",
+    courseCoverImage: "crousel-3.jpg",
     coursePrice: 5000,
-    topics: [
+    courseTopics: [
       "Section Intro",
       "Preview",
       "Doctype & Basic Layout",
@@ -98,8 +95,6 @@ const data = [
       "HTML Entities",
       "HTML5 Semantic Tags & Challenge",
       "HTML5 Semantics Solution & Wrap Up",
-    ],
-    topic2: [
       "Section Intro",
       "Implementing CSS",
       "Basic CSS Selectors",
@@ -123,13 +118,12 @@ const data = [
     ],
   },
   {
-    id: 4,
     courseName: "Javascript Programming",
-    slug: "javascript-programming",
     courseDescription: `JavaScript is a dynamic computer programming language. It is lightweight and most commonly used as a part of web pages, whose implementations allow client-side script to interact with the user and make dynamic pages. It is an interpreted programming language with object-oriented capabilities.`,
     courseDuration: "3 Months",
+    courseCoverImage: "crousel-4.jpg",
     coursePrice: 5000,
-    topics: [
+    courseTopics: [
       "Basics",
       "Syntax",
       "Enabling",
@@ -168,13 +162,13 @@ const data = [
     ],
   },
   {
-    id: 5,
     courseName: "ExpressJs Backend App Framework",
     slug: "expresjs-backend-app-framework",
     courseDescription: `Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy. Express provides a thin layer of fundamental web application features, without obscuring Node.js features that you know and love.`,
     courseDuration: "5 Months",
+    courseCoverImage: "crousel-5.jpg",
     coursePrice: 8000,
-    topics: [
+    courseTopics: [
       "Home",
       "Introduction",
       "Environment Setup",
@@ -197,13 +191,13 @@ const data = [
     ],
   },
   {
-    id: 5,
     courseName: "ReactJs for Modern Frontend Website",
     slug: "reactjs-for-modern-frontend-website",
     courseDescription: `React is the most popular front-end JavaScript library in the field of web development. It is used by large, established companies and newly-minted startups alike (Netflix, Airbnb, Instagram, and the New York Times, to name a few). React brings many advantages to the table, making it a better choice than other frameworks like Angular.js.`,
     courseDuration: "5 Months",
+    courseCoverImage: "crousel-1.jpg",
     coursePrice: 8000,
-    topics: [
+    courseTopics: [
       "Home",
       "Overview",
       "Environment Setup",
@@ -228,4 +222,4 @@ const data = [
   },
 ];
 
-export default data;
+export default courses;

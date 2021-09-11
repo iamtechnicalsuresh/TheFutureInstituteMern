@@ -15,7 +15,7 @@ const Card = ({ image, title, description, link, imageClass }) => {
       </div>
       {link ? (
         <Link
-          to={`/course-details/${link}`}
+          to={`/coursedetails/${link}`}
           className="btn btn-primary width-100"
         >
           More About This Course

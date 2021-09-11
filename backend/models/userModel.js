@@ -14,10 +14,6 @@ const userSchema = mongoose.Schema(
       unique: true,
       validate: validator.isEmail,
     },
-    phone: {
-      type: String,
-      unique: true,
-    },
     password: {
       type: String,
       required: true,
@@ -35,7 +31,7 @@ const userSchema = mongoose.Schema(
     },
   },
   {
-    timestampe: true,
+    timestamps: true,
   }
 );
 

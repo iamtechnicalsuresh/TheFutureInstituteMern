@@ -3,15 +3,23 @@ import axios from "axios";
 
 export const fetchCourses = createAsyncThunk(
   "courses/fetchCourses",
-  async () => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+  async (_, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
-    const response = await axios.get("/api/v1/courses", config);
-    return response.data;
+      const response = await axios.get("/api/v1/courses", config);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
   }
 );
 
@@ -33,11 +41,15 @@ export const fetchCourse = createAsyncThunk(
 
 export const postCourse = createAsyncThunk(
   "courses/postCourse",
-  async (course, { rejectWithValue }) => {
+  async (course, { rejectWithValue, getState }) => {
+    const currentState = getState().authUser;
+    const { user } = currentState;
+
     try {
       const config = {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
         },
       };
       const response = await axios.post("/api/v1/courses", course, config);
@@ -54,11 +66,14 @@ export const postCourse = createAsyncThunk(
 
 export const deleteCourse = createAsyncThunk(
   "courses/delete",
-  async (slug, { rejectWithValue }) => {
+  async (slug, { rejectWithValue, getState }) => {
+    const currentState = getState().authUser;
+    const { user } = currentState;
     try {
       const config = {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
         },
       };
       const response = await axios.delete(`/api/v1/courses/${slug}`, config);
@@ -76,6 +91,7 @@ export const deleteCourse = createAsyncThunk(
 const initialState = {
   loading: false,
   courses: [],
+  course: {},
   error: "",
   success: "",
 };
@@ -133,11 +149,11 @@ const coursesSlice = createSlice({
     [deleteCourse.pending]: (state, action) => {
       state.loading = true;
     },
-    [deleteCourse.pending]: (state, action) => {
+    [deleteCourse.fulfilled]: (state, action) => {
       state.loading = false;
       state.success = true;
     },
-    [deleteCourse.pending]: (state, action) => {
+    [deleteCourse.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },

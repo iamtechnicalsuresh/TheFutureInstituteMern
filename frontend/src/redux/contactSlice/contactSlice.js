@@ -23,8 +23,60 @@ export const postContact = createAsyncThunk(
   }
 );
 
+export const fetchContacts = createAsyncThunk(
+  "contact/getchContacts",
+  async (_, { rejectWithValue, getState }) => {
+    const currentState = getState().authUser;
+    const { user } = currentState;
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      const response = await axios.get("/api/v1/contact", config);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
+export const deleteContact = createAsyncThunk(
+  "contact/deleteContact",
+  async (id, { rejectWithValue, getState }) => {
+    const currentState = getState().authUser;
+    const { user } = currentState;
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+
+      const response = await axios.delete(`/api/v1/contact/${id}`, config);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
 const initialState = {
   loading: false,
+  contacts: [],
   contact: {},
   success: "",
   error: "",
@@ -48,6 +100,31 @@ const contactSlice = createSlice({
       state.success = true;
     },
     [postContact.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    [fetchContacts.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [fetchContacts.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.contacts = action.payload;
+    },
+    [fetchContacts.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    [deleteContact.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [deleteContact.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.success = true;
+      // state.contact = action.payload;
+    },
+    [deleteContact.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },

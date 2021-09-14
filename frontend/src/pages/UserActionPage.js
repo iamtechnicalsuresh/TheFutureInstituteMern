@@ -46,8 +46,12 @@ const UserActionPage = () => {
     dispatch(deleteUser(id));
   };
 
-  const editHandler = (slug) => {
-    history.push(`/courseeditpage/${slug}`);
+  const editHandler = (id) => {
+    history.push(`/admin/edituser/${id}`);
+  };
+
+  const addUserHandler = () => {
+    history.push("/admin/adduser");
   };
 
   return (
@@ -58,6 +62,9 @@ const UserActionPage = () => {
       <div className="table-content">
         <div className="container">
           <h1 className="primary-heading">Users</h1>
+          <div className="add-icon" onClick={addUserHandler}>
+            <i className="far fa-plus-square"></i>
+          </div>
           {loading && <Loader />}
           <table className="tables">
             <thead>

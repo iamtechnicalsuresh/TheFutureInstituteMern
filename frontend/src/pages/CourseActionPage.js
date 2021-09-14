@@ -47,7 +47,7 @@ const CourseActionPage = () => {
   };
 
   const editHandler = (slug) => {
-    history.push(`/courseeditpage/${slug}`);
+    history.push(`/admin/editcourses/${slug}`);
   };
 
   const addCouresHandler = () => {

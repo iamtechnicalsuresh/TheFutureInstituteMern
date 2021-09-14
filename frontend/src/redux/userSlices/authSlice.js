@@ -60,6 +60,10 @@ const authSlice = createSlice({
   name: "authUser",
   initialState,
   reducers: {
+    logout(state) {
+      state.user = null;
+      localStorage.removeItem("theFutureInsituteUserInfo");
+    },
     clearError(state) {
       state.error = "";
     },
@@ -97,5 +101,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { clearError, clearSuccess } = authSlice.actions;
+export const { clearError, clearSuccess, logout } = authSlice.actions;
 export default authSlice.reducer;

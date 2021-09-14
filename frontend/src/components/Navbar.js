@@ -1,14 +1,28 @@
 import { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, Link, useHistory } from "react-router-dom";
+import { logout } from "../redux/userSlices/authSlice";
 import "../styles/Navbar.css";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const [navToggler, setNavToggler] = useState(false);
   const [openAccount, setOpenAccount] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
+
+  const authUser = useSelector((state) => state.authUser);
+  const { user } = authUser;
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    history.push("/login");
+  };
 
   return (
-    <nav className="main-nav">
+    <nav className="main-nav nav-fixed">
       <a href="/" className="logo">
         <h1>LOGO</h1>
       </a>
@@ -52,7 +66,7 @@ const Navbar = () => {
       </ul>
 
       <div className="nav-icons">
-        <div className="accounts">
+        <div className={user && user ? "accounts accounts-hidden" : "accounts"}>
           <i
             className="fas fa-user"
             onClick={() => setOpenAccount(!openAccount)}
@@ -91,6 +105,40 @@ const Navbar = () => {
             </form>
           </div>
         </div>
+        {user && (
+          <div
+            className="user-info"
+            onClick={() => setOpenProfile(!openProfile)}
+          >
+            <img
+              src={`/images/${user.profileImage}`}
+              alt="Profile Pic"
+              className="user-info-img"
+            />
+            <div
+              className={
+                openProfile
+                  ? "user-info-dropdown"
+                  : "user-info-dropdown user-info-dropdown-hidden"
+              }
+            >
+              <div className="user-info-dropdown-profile-info">
+                <img src={`/images/${user.profileImage}`} alt="" />
+                <h2 className="secondary-heading">{user.fullname}</h2>
+                <p className="secondary-description">{user.email}</p>
+              </div>
+              <Link to="/admin/dashboard" className="user-info-dropdown-list">
+                Dashboard
+              </Link>
+              <Link to="/admin/dashboard" className="user-info-dropdown-list">
+                Profile
+              </Link>
+              <p className="user-info-dropdown-list" onClick={logoutHandler}>
+                Logout
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="nav-toggler" onClick={() => setNavToggler(!navToggler)}>

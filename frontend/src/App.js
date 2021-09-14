@@ -16,6 +16,9 @@ import Dashboard from "./pages/Dashboard";
 import CourseActionPage from "./pages/CourseActionPage";
 import ContactActionPage from "./pages/ContactActionPage";
 import UserActionPage from "./pages/UserActionPage";
+import UserCreatePage from "./pages/UserCreatePage";
+import UserEditPage from "./pages/UserEditPage";
+import CoursesEditPage from "./pages/CourseEditPage";
 
 const App = () => {
   return (
@@ -31,9 +34,12 @@ const App = () => {
         <Route path="/register" component={RegisterPage} />
         <Route path="/admin/dashboard" component={Dashboard} />
         <Route path="/admin/addcourses" component={CoursesCreatePage} />
+        <Route path="/admin/editcourses/:slug" component={CoursesEditPage} />
         <Route path="/admin/courseactionpage" component={CourseActionPage} />
         <Route path="/admin/contactactionpage" component={ContactActionPage} />
         <Route path="/admin/useractionpage" component={UserActionPage} />
+        <Route path="/admin/adduser" component={UserCreatePage} />
+        <Route path="/admin/edituser/:id" component={UserEditPage} />
       </Switch>
       <ToastContainer position="top-center" />
       <Footer />

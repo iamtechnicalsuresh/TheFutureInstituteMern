@@ -26,7 +26,7 @@ export const fetchUsers = createAsyncThunk(
 );
 
 export const fetchUser = createAsyncThunk(
-  "users/fetchUsers",
+  "users/fetchUser",
   async (id, { rejectWithValue, getState }) => {
     const currentState = getState().authUser;
     const { user } = currentState;
@@ -49,8 +49,32 @@ export const fetchUser = createAsyncThunk(
   }
 );
 
+export const createUsers = createAsyncThunk(
+  "users/createUsers",
+  async (data, { rejectWithValue, getState }) => {
+    const currentState = getState().authUser;
+    const { user } = currentState;
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      const response = await axios.post("/api/v1/users", data, config);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
 export const deleteUser = createAsyncThunk(
-  "users/fetchUsers",
+  "users/deleteUsers",
   async (id, { rejectWithValue, getState }) => {
     const currentState = getState().authUser;
     const { user } = currentState;
@@ -73,12 +97,44 @@ export const deleteUser = createAsyncThunk(
   }
 );
 
+export const changePasswordByAdmin = createAsyncThunk(
+  "users/changePasswordByAdmin",
+  async (data, { rejectWithValue, getState }) => {
+    const currentState = getState().authUser;
+    const { user } = currentState;
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      const response = await axios.put(
+        "/api/v1/users/change-password-by-admin",
+        data,
+        config
+      );
+      localStorage.setItem(
+        "theFutureInsituteUserInfo",
+        JSON.stringify(response.data)
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
 const initialState = {
   loading: false,
-  error: "",
-  success: "",
   users: [],
   user: {},
+  error: "",
+  success: "",
 };
 
 const userSlice = createSlice({
@@ -87,6 +143,9 @@ const userSlice = createSlice({
   reducers: {
     clearError(state) {
       state.error = "";
+    },
+    clearSuccess(state) {
+      state.success = "";
     },
   },
   extraReducers: {
@@ -107,9 +166,22 @@ const userSlice = createSlice({
     },
     [fetchUser.fulfilled]: (state, action) => {
       state.loading = false;
-      state.users = action.payload;
+      state.user = action.payload;
     },
     [fetchUser.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    [createUsers.pending]: (state) => {
+      state.loading = true;
+    },
+    [createUsers.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.success = true;
+      state.user = action.payload;
+    },
+    [createUsers.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
@@ -120,15 +192,28 @@ const userSlice = createSlice({
     [deleteUser.fulfilled]: (state, action) => {
       state.loading = false;
       state.success = true;
-      state.users = action.payload;
+      state.user = action.payload;
     },
     [deleteUser.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    [changePasswordByAdmin.pending]: (state) => {
+      state.loading = true;
+    },
+    [changePasswordByAdmin.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.success = true;
+      state.user = action.payload;
+    },
+    [changePasswordByAdmin.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
   },
 });
 
-export const { clearError } = userSlice.actions;
+export const { clearError, clearSuccess } = userSlice.actions;
 
 export default userSlice.reducer;

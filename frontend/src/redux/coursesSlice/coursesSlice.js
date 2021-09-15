@@ -64,6 +64,34 @@ export const postCourse = createAsyncThunk(
   }
 );
 
+export const updateCourse = createAsyncThunk(
+  "courses/updateCourse",
+  async (course, { rejectWithValue, getState }) => {
+    const currentState = getState().authUser;
+    const { user } = currentState;
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      const response = await axios.put(
+        `/api/v1/courses/${course.courseSlug}`,
+        course,
+        config
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
 export const deleteCourse = createAsyncThunk(
   "courses/delete",
   async (slug, { rejectWithValue, getState }) => {
@@ -142,6 +170,19 @@ const coursesSlice = createSlice({
       state.success = true;
     },
     [postCourse.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    // Update Course
+    [updateCourse.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [updateCourse.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.success = true;
+    },
+    [updateCourse.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },

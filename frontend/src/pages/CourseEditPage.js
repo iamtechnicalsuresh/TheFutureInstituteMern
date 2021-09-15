@@ -10,6 +10,7 @@ import {
   fetchCourse,
   clearError,
   clearSuccess,
+  updateCourse,
 } from "../redux/coursesSlice/coursesSlice";
 import Loader from "../components/Loader";
 
@@ -57,10 +58,11 @@ const CoursesEditPage = () => {
       toast(error);
       dispatch(clearError());
     } else if (success) {
-      toast("Course Submit Successfully");
+      toast("Course Updated Successfully");
       dispatch(clearSuccess());
+      history.push("/admin/courseactionpage");
     }
-  }, [course, dispatch, error, success]);
+  }, [course, dispatch, error, success, history]);
 
   const addTopicHandler = (e, index) => {
     const topicUpdate = courseTopics.map((item, i) =>
@@ -85,16 +87,17 @@ const CoursesEditPage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch(
-    //   postCourse({
-    //     courseName,
-    //     courseDescription,
-    //     courseTopics,
-    //     courseDuration,
-    //     coursePrice,
-    //     courseCoverImage,
-    //   })
-    // );
+    dispatch(
+      updateCourse({
+        courseSlug: slug,
+        courseName,
+        courseDescription,
+        courseTopics,
+        courseDuration,
+        coursePrice,
+        courseCoverImage,
+      })
+    );
   };
 
   return (

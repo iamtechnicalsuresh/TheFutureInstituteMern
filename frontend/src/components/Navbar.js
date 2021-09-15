@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="main-nav nav-fixed">
+    <nav className="main-nav">
       <a href="/" className="logo">
         <h1>LOGO</h1>
       </a>

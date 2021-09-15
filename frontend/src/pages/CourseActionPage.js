@@ -83,7 +83,7 @@ const CourseActionPage = () => {
                 courses.map((course) => (
                   <tr key={course._id}>
                     <td>{course.courseName}</td>
-                    <td>{course.courseDuration}</td>
+                    <td>{course.courseDuration} Month</td>
                     <td className="table-btn">
                       {course.coursePrice} <i className="fas fa-rupee-sign"></i>
                     </td>

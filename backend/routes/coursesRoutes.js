@@ -4,6 +4,7 @@ import {
   getCourse,
   createCourse,
   deleteCourse,
+  updateCourse,
 } from "../controllers/coursesController.js";
 import { isLoggedIn, isAuthorized } from "../middlewares/authMiddleware.js";
 
@@ -16,6 +17,7 @@ router
 router
   .route("/:slug")
   .get(getCourse)
+  .put(isLoggedIn, isAuthorized("admin"), updateCourse)
   .delete(isLoggedIn, isAuthorized("admin"), deleteCourse);
 
 export default router;

@@ -1,6 +1,11 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link, useHistory } from "react-router-dom";
+import {
+  setSearchBar,
+  setAccountBar,
+  setNavToggler,
+  setProfileMenu,
+} from "../redux/navbarSlices/navbarSlice";
 import { logout } from "../redux/userSlices/authSlice";
 import "../styles/Navbar.css";
 
@@ -8,13 +13,11 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [navToggler, setNavToggler] = useState(false);
-  const [openAccount, setOpenAccount] = useState(false);
-  const [openSearch, setOpenSearch] = useState(false);
-  const [openProfile, setOpenProfile] = useState(false);
-
   const authUser = useSelector((state) => state.authUser);
   const { user } = authUser;
+
+  const navbar = useSelector((state) => state.navbar);
+  const { accountBar, searchBar, navToggler, profileMenu } = navbar;
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -69,9 +72,9 @@ const Navbar = () => {
         <div className={user && user ? "accounts accounts-hidden" : "accounts"}>
           <i
             className="fas fa-user"
-            onClick={() => setOpenAccount(!openAccount)}
+            onClick={() => dispatch(setAccountBar(!accountBar))}
           ></i>
-          <div className={openAccount ? "account" : "account account-hidden"}>
+          <div className={accountBar ? "account" : "account account-hidden"}>
             <Link to="/login">
               <span>
                 <i className="fas fa-sign-in-alt"></i>
@@ -86,11 +89,14 @@ const Navbar = () => {
             </Link>
           </div>
         </div>
-        <div className="search" onClick={() => setOpenSearch(!openSearch)}>
+        <div
+          className="search"
+          onClick={() => dispatch(setSearchBar(!searchBar))}
+        >
           <i className="fas fa-search"></i>
           <div
             className={
-              openSearch ? "search-bar" : "search-bar search-bar-hidden"
+              searchBar ? "search-bar" : "search-bar search-bar-hidden"
             }
           >
             <form action="" className="search-bar__form">
@@ -108,7 +114,7 @@ const Navbar = () => {
         {user && (
           <div
             className="user-info"
-            onClick={() => setOpenProfile(!openProfile)}
+            onClick={() => dispatch(setProfileMenu(!profileMenu))}
           >
             <img
               src={`/images/${user.profileImage}`}
@@ -117,7 +123,7 @@ const Navbar = () => {
             />
             <div
               className={
-                openProfile
+                profileMenu
                   ? "user-info-dropdown"
                   : "user-info-dropdown user-info-dropdown-hidden"
               }
@@ -141,7 +147,10 @@ const Navbar = () => {
         )}
       </div>
 
-      <div className="nav-toggler" onClick={() => setNavToggler(!navToggler)}>
+      <div
+        className="nav-toggler"
+        onClick={() => dispatch(setNavToggler(!navToggler))}
+      >
         <i className={navToggler ? "fas fa-times" : "fas fa-bars"}></i>
       </div>
     </nav>

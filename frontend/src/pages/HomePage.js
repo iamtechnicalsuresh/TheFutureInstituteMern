@@ -3,10 +3,12 @@ import Crousel from "../components/Crousel";
 import Card from "../components/Card";
 import homePageCourseData from "./homePageCourses";
 
+import { crouselData } from "./CrouselData";
+
 const HomePage = () => {
   return (
     <main>
-      <Crousel />
+      <Crousel crousels={crouselData} />
       <section className="section">
         <div className="container">
           <div className="section-title">

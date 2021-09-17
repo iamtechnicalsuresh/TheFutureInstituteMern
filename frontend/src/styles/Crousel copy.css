@@ -17,14 +17,7 @@
   right: 0;
   width: 100%;
   height: calc(100vh - 5rem);
-  opacity: 0;
-  transform: scale(0.9);
   transition: all 0.5s ease-in-out;
-}
-
-.crousel.active {
-  opacity: 1;
-  transform: scale(1);
 }
 
 .crousel--items__image {

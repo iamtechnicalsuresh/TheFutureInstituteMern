@@ -39,8 +39,8 @@ const App = () => {
   return (
     <Router>
       <Navbar />
-      <Switch>
-        <main onClick={hideElements}>
+      <main onClick={hideElements}>
+        <Switch>
           <Route path="/" component={HomePage} exact />
           <Route path="/courses" component={CoursesPage} />
           <Route path="/coursedetails/:slug" component={CourseDetailPage} />
@@ -59,8 +59,8 @@ const App = () => {
           <Route path="/admin/useractionpage" component={UserActionPage} />
           <Route path="/admin/adduser" component={UserCreatePage} />
           <Route path="/admin/edituser/:id" component={UserEditPage} />
-        </main>
-      </Switch>
+        </Switch>
+      </main>
       <ToastContainer position="top-center" />
       <Footer />
     </Router>

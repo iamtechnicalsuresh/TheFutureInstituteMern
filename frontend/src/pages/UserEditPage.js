@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
   fetchUser,
   changePasswordByAdmin,
+  updateUserByAdmin,
 } from "../redux/userSlices/userSlice";
 
 import Sidebar from "../components/Sidebar";
@@ -12,6 +13,7 @@ import Loader from "../components/Loader";
 
 const UserEditPage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { id } = useParams();
   const [fullname, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -36,9 +38,10 @@ const UserEditPage = () => {
       toast(error);
     }
     if (success) {
-      toast("Password Changed Successfully.");
+      toast("User Updated Successfully.");
+      history.push("/admin/useractionpage");
     }
-  }, [dispatch, user, error, success]);
+  }, [dispatch, user, error, success, history]);
 
   const changePasswordHandler = (e) => {
     e.preventDefault();
@@ -50,6 +53,7 @@ const UserEditPage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(updateUserByAdmin({ id, fullname, email, role }));
   };
 
   return (

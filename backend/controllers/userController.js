@@ -77,6 +77,29 @@ export const changePasswordByAdmin = catchAsyncHandler(
   }
 );
 
+export const updateUserByAdmin = catchAsyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  const { fullname, email, role } = req.body;
+  console.log(req.body);
+  console.log(id);
+
+  const updateUser = await User.findById(id);
+  if (!updateUser) {
+    return next(
+      new AppCustomError("User not found please update correct user.", 403)
+    );
+  }
+  updateUser.fullname = fullname;
+  updateUser.email = email;
+  updateUser.role = role;
+
+  updateUser.save();
+  res.status(200).json({
+    status: "success",
+    message: "User Updated Successfully.",
+  });
+});
+
 export const registerUserbyAdmin = catchAsyncHandler(async (req, res, next) => {
   const { fullname, email, mobile, password, cpassword, role } = req.body;
   const findUser = await User.findOne({ email });

@@ -134,13 +134,13 @@ const Navbar = () => {
                 <p className="secondary-description">{user.email}</p>
               </div>
               <Link to="/admin/dashboard" className="user-info-dropdown-list">
-                Dashboard
+                <i className="fas fa-tachometer-alt"></i> Dashboard
               </Link>
               <Link to="/admin/dashboard" className="user-info-dropdown-list">
-                Profile
+                <i className="fas fa-user"></i> Profile
               </Link>
               <p className="user-info-dropdown-list" onClick={logoutHandler}>
-                Logout
+                <i className="fas fa-sign-out-alt"></i> Logout
               </p>
             </div>
           </div>

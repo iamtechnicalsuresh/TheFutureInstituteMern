@@ -114,9 +114,33 @@ export const changePasswordByAdmin = createAsyncThunk(
         data,
         config
       );
-      localStorage.setItem(
-        "theFutureInsituteUserInfo",
-        JSON.stringify(response.data)
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
+export const updateUserByAdmin = createAsyncThunk(
+  "users/updateUserByAdmin",
+  async (data, { rejectWithValue, getState }) => {
+    const currentState = getState().authUser;
+    const { user } = currentState;
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      const response = await axios.put(
+        `/api/v1/users/update-users-by-admin/${data.id}`,
+        data,
+        config
       );
       return response.data;
     } catch (error) {
@@ -208,6 +232,18 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
     [changePasswordByAdmin.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    [updateUserByAdmin.pending]: (state) => {
+      state.loading = true;
+    },
+    [updateUserByAdmin.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.success = true;
+      state.user = action.payload;
+    },
+    [updateUserByAdmin.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },

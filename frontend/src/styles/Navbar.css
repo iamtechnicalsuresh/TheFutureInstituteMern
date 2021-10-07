@@ -108,10 +108,12 @@
 
 .accounts {
   position: relative;
+  pointer-events: auto;
 }
 
 .accounts-hidden {
   display: none;
+  pointer-events: none;
 }
 
 .accounts .account {
@@ -172,12 +174,14 @@
   background: linear-gradient(to top left, blue, rgb(83, 83, 168));
   border-radius: 0.4rem;
   transition: all 0.2s ease-in;
+  pointer-events: auto;
 }
 
 .search-bar-hidden {
   opacity: 0;
   z-index: -1;
   transform: translateY(-0.5rem);
+  pointer-events: none;
 }
 
 .search-bar__form {

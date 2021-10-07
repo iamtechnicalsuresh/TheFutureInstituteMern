@@ -13,6 +13,9 @@
 /build
 /frontend/build
 
+/MobileApp
+MobileApp
+
 # misc
 .DS_Store
 .env.local

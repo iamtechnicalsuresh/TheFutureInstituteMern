@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useInView } from "react-intersection-observer";
+import { setStickyNav } from "../redux/navbarSlices/navbarSlice";
 import "../styles/Crousel.css";
 
 const Crousel = ({ crousels }) => {
+  const dispatch = useDispatch();
+  const [ref, view] = useInView();
   const [currentCrousel, setCurrentCrousel] = useState(0);
   const length = crousels.length;
 
@@ -12,8 +17,16 @@ const Crousel = ({ crousels }) => {
     setCurrentCrousel(currentCrousel === 0 ? length - 1 : currentCrousel - 1);
   };
 
+  useEffect(() => {
+    if (view) {
+      dispatch(setStickyNav(true));
+    } else {
+      dispatch(setStickyNav(false));
+    }
+  });
+
   return (
-    <section className="section onScrollNavFixed">
+    <section className="section" ref={ref}>
       <div className="crousels">
         {crousels.map((crousel, index) => {
           return (

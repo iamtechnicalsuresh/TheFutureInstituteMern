@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { setStickyNav } from "../redux/navbarSlices/navbarSlice";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 
@@ -15,6 +16,8 @@ const ContactPage = () => {
   const [mobile, setMobile] = useState("");
   const [purpose, setPurpose] = useState("");
   const [message, setMessage] = useState("");
+
+  dispatch(setStickyNav(true));
 
   useEffect(() => {
     if (error) {

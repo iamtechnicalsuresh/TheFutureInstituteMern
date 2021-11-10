@@ -5,6 +5,7 @@ const initialState = {
   searchBar: false,
   navToggler: false,
   profileMenu: false,
+  stickyNav: false,
 };
 
 const navbarSlice = createSlice({
@@ -23,9 +24,17 @@ const navbarSlice = createSlice({
     setProfileMenu(state, action) {
       state.profileMenu = action.payload;
     },
+    setStickyNav(state, action) {
+      state.stickyNav = action.payload;
+    },
   },
 });
 
-export const { setAccountBar, setSearchBar, setNavToggler, setProfileMenu } =
-  navbarSlice.actions;
+export const {
+  setAccountBar,
+  setSearchBar,
+  setNavToggler,
+  setProfileMenu,
+  setStickyNav,
+} = navbarSlice.actions;
 export default navbarSlice.reducer;

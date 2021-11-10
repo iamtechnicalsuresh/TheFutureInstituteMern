@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-
+import { setStickyNav } from "../redux/navbarSlices/navbarSlice";
 import { fetchCourses } from "../redux/coursesSlice/coursesSlice";
 
 import Card from "../components/Card";
@@ -15,6 +15,8 @@ const CoursesPage = () => {
     loading,
     error,
   } = course;
+
+  dispatch(setStickyNav(true));
 
   useEffect(() => {
     dispatch(fetchCourses());

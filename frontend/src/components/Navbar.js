@@ -17,7 +17,7 @@ const Navbar = () => {
   const { user } = authUser;
 
   const navbar = useSelector((state) => state.navbar);
-  const { accountBar, searchBar, navToggler, profileMenu } = navbar;
+  const { accountBar, searchBar, navToggler, profileMenu, stickyNav } = navbar;
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="main-nav">
+    <nav className={!stickyNav ? "main-nav nav-fixed" : "main-nav"}>
       <a href="/" className="logo">
         <h1>LOGO</h1>
       </a>

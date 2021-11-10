@@ -13,6 +13,7 @@ const store = configureStore({
     authUser: authUser,
     users: userSlice,
   },
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 export default store;
